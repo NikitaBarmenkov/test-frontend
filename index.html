@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+        <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
+
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="app">
+            <div class="header">
+                <div class="logo">
+                    <img >
+                </div>
+                <div class="contacts">
+                    <p>Бакинский проезд, 57а</p>
+                    <p>8-***-***-**-**</p>
+                    <a href="https://vk.com/marata_shaurma"><p>Группа ВК</p></a>
+                </div>
+            </div>
+            <div class="content">
+                <p class="basket"><a href="./cart.html">Перейти в корзину &#10095;</a></p>
+                <div class="md-layout">
+                    <div class="md-layout-item">
+                        <md-card class="card-info">
+                            <md-card-header>
+                              <div class="md-title">Акции</div>
+                            </md-card-header>
+                      
+                            <md-card-content>
+                              Описание акций
+                            </md-card-content>
+                      
+                            <md-card-actions>
+                              <md-button>Подробнее</md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                    <div class="md-layout-item">
+                        <md-card class="card-info">
+                            <md-card-header>
+                              <div class="md-title">Доставка и оплата</div>
+                            </md-card-header>
+                      
+                            <md-card-content>
+                                Описание доставки и правила оплаты
+                            </md-card-content>
+                      
+                            <md-card-actions>
+                              <md-button>Подробнее</md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                </div>
+                <p class="title-text">Каталог</p>
+
+                <div>
+                    <md-card class="card-item" v-for="item in items">
+                        <md-card-header>
+                            <md-card-media>
+                                <img src="/assets/examples/avatar-2.jpg" alt="image">
+                            </md-card-media>
+                            <md-card-header-text>
+                                <div class="md-title">{{item.name}}</div>
+                                <p><b>{{item.price}}<span class="md-suffix"> руб.</span></b></p>
+                            </md-card-header-text>
+
+                        </md-card-header>
+
+                        <md-card-actions>
+                            <md-button v-on:click="add_to_cart(item)">В корзину</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+            </div>
+            
+        </div>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vue-material"></script>
+        <script>
+            Vue.use(VueMaterial.default)
+
+            new Vue({
+              el: '#app',
+              data: {
+                    items: [{ id: 1, name: 'Пироги', price: 20 },
+                    { id: 2,  name: 'Напитки радуга', price: 25 },
+                    { id: 3, name: 'Вода газ/не газ', price: 25},
+                    { id: 4, name: 'Action', price: 40},
+                    { id: 5, name: 'Чай в бутылках', price: 50},
+                    { id: 6, name: 'Лаваш', price: 16},
+                    { id: 7, name: 'Хот дог в лаваше', price: 80},
+                    { id: 8, name: 'Шаурма школьная', price: 100},
+                    { id: 9, name: 'Шаурма классика с курицей', price: 120},
+                    { id: 10, name: 'Шаурма классика со свининой', price: 140},
+                    { id: 11, name: 'Шаурма мега с курицей', price: 160},
+                    { id: 12, name: 'Шаурма мега со свининой', price: 180},
+                    ],
+
+              },
+              methods: {
+                    add_to_cart: function(item) {
+                        let val = JSON.parse(localStorage.getItem('cart'));
+                        if (val) {
+                            const index = val.findIndex((el) => el.id == item.id);
+                            if (index >= 0) {
+                                val[index].quantity++;
+                            }
+                            else {
+                                val.push({
+                                    id: item.id,
+                                    name: item.name,
+                                    price: item.price,
+                                    sum: item.price,
+                                    quantity: 1
+                                });
+                            }
+                            localStorage.setItem('cart', JSON.stringify(val));
+                        }
+                        else {
+                            val = [];
+                            val.push({
+                                id: item.id,
+                                name: item.name,
+                                price: item.price,
+                                sum: item.price,
+                                quantity: 1
+                            });
+                            localStorage.setItem('cart', JSON.stringify(val));
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+.title-text {
+    font-family: arial, bold;
+    font-size: 25px;
+}
+.card-item {
+    width: 300px;
+    height: auto;
+    display: inline-block;
+    margin: 8px;
+    vertical-align: top;
+}
+.content {
+    width: 95%; 
+    background-color: rgb(255, 255, 255); 
+    margin: auto;
+    padding: 8px;
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 0px 21px -1px rgba(0,0,0,0.49);
+    -moz-box-shadow: -2px 0px 21px -1px rgba(0,0,0,0.49);
+    box-shadow: -2px 0px 21px -1px rgba(0,0,0,0.49);
+}
+body {
+    background-color: rgb(88, 88, 88);
+}
+.header {
+    display: flex; 
+    justify-content: space-around;
+    height: 200px;
+}
+.contacts p {
+    color: white;
+    margin: 8px;
+}
+.basket {
+    text-align: center;
+}
+.md-layout-item {
+    margin: 8px;
+}
+.client-info {
+    width: 50%;
+    margin: auto;
+}
+@media only screen and (max-width:700px) {
+    /* For mobile phones: */
+    .client-info {
+      width:100%;
+    }
+  }
+.item-quantity-container p .md-button{
+    display: inline;
+    justify-content: center;
+    margin: 8px;
+    font-size: 20px;
+}
